@@ -1,16 +1,14 @@
 package modelo;
 
-import java.util.ArrayList;
-
 public class Divida {
 
 	private double totalDiv;
-	private double valorPago;
 
 	private String credor;
-	private String cnpjCredor;
 
-	private ArrayList<Pagamento> pagamentos = new ArrayList<>();
+	private Cnpj cnpjCredor;
+
+	private Pagamentos pagamentos = new Pagamentos();
 
 	public double getTotalDiv() {
 		return totalDiv;
@@ -18,10 +16,6 @@ public class Divida {
 
 	public void setTotalDiv(double totalDiv) {
 		this.totalDiv = totalDiv;
-	}
-
-	public double getValorPago() {
-		return valorPago;
 	}
 
 	public String getCredor() {
@@ -32,30 +26,19 @@ public class Divida {
 		this.credor = credor;
 	}
 
-	public String getCnpjCredor() {
+	public Cnpj getCnpjCredor() {
 		return cnpjCredor;
 	}
 
-	public void setCnpjCredor(String cnpjCredor) {
+	public void setCnpjCredor(Cnpj cnpjCredor) {
 		this.cnpjCredor = cnpjCredor;
 	}
 
-	public ArrayList<Pagamento> getPagamentos() {
-		return pagamentos;
-	}
-
 	public void registra(Pagamento pagamento) {
-		this.pagamentos.add(pagamento);
-		this.paga(pagamento.getValor());
+		pagamentos.registra(pagamento);
 	}
 
-	private void paga(double valor) {
-		if (valor < 0) {
-			throw new IllegalArgumentException("Valor inválido para Pagamento");
-		}
-		if (valor > 100) {
-			valor -= 8;
-		}
-		this.valorPago += valor;
+	public double getValorPago() {
+		return pagamentos.getValorPago();
 	}
 }
