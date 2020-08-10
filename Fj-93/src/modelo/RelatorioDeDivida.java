@@ -12,7 +12,7 @@ public class RelatorioDeDivida {
 	}
 
 	public void geraRelatorio(NumberFormat formatador) {
-		String msg = "Cnpj credor: " + divida.getCnpjCredor() + "\nCredor: " + divida
+		String msg = "Cnpj credor: " + divida.getDocumentoCredor() + "\nCredor: " + divida
 				.getCredor() + "\nValor da divida: " + formatador
 						.format(divida.getTotalDiv()) + "\nValor Pago: " + formatador.format(divida.getValorPago());
 		System.out.println(msg);
@@ -21,12 +21,12 @@ public class RelatorioDeDivida {
 	public static void main(String[] args) {
 		Divida divida = new Divida();
 		Cnpj cnpjCredor = new Cnpj("00.000.001/0001-01");
-		divida.setCnpjCredor(cnpjCredor);
+		divida.setDocumentoCredor(cnpjCredor);
 		divida.setCredor("Uma empresa");
 		divida.setTotalDiv(100);
 
 		Pagamento pagamento = new Pagamento();
-		pagamento.setCnpjPagador("00.000.002/0002-02");
+		pagamento.setDocumentoPagador(new Cnpj("00.000.002/0002-02"));
 		pagamento.setPagador("Outro pagador");
 		pagamento.setValor(20);
 

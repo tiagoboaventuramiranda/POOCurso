@@ -1,19 +1,30 @@
 package modelo;
 
-import java.util.HashMap;
-
 public class BalancoEmpresa {
 
-	private HashMap<Cnpj, Divida> dividas = new HashMap<Cnpj, Divida>();
+	private ArmazenadorDeDividas dividas;
 
-	public void registrarDivida(Divida divida) {
-		dividas.put(divida.getCnpjCredor(), divida);
+	public BalancoEmpresa(ArmazenadorDeDividas dividas) {
+		this.dividas = dividas;
 	}
 
-	public void pagaDivida(Cnpj cnpjCredor, Pagamento pagamento) {
-		Divida divida = dividas.get(cnpjCredor);
+	public ArmazenadorDeDividas getDividas() {
+		return dividas;
+	}
+
+	public void setDividas(ArmazenadorDeDividas dividas) {
+		this.dividas = dividas;
+	}
+
+	public void registrarDivida(Divida divida) {
+		dividas.salva(divida);
+	}
+
+	public void pagaDivida(Documento documentoCredor, Pagamento pagamento) {
+		Divida divida = dividas.carrega(documentoCredor);
 		if (divida != null) {
 			divida.registra(pagamento);
 		}
+		dividas.salva(divida);
 	}
 }

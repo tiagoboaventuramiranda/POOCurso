@@ -2,21 +2,22 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Iterator;
 
 public class Pagamentos implements Iterable<Pagamento> {
 
 	private double valorPago;
 
-	private ArrayList<Pagamento> pagamentos = new ArrayList<>();
+	private Collection<Pagamento> pagamentos = new ArrayList<>();
 
 	public double getValorPago() {
 		return valorPago;
 	}
 
-	public ArrayList<Pagamento> pagamentosAntesDe(Calendar data) {
+	public Collection<Pagamento> pagamentosAntesDe(Calendar data) {
 		ArrayList<Pagamento> pagamentosFiltrados = new ArrayList<>();
-		for (Pagamento pagamento : this.pagamentos) {
+		for (Pagamento pagamento : this) {
 			if (pagamento.getData().before(data)) {
 				pagamentosFiltrados.add(pagamento);
 			}
@@ -24,9 +25,9 @@ public class Pagamentos implements Iterable<Pagamento> {
 		return pagamentosFiltrados;
 	}
 
-	public ArrayList<Pagamento> pagamentosComValorMaiorQue(double valorMinimo) {
+	public Collection<Pagamento> pagamentosComValorMaiorQue(double valorMinimo) {
 		ArrayList<Pagamento> pagamentosFiltrados = new ArrayList<>();
-		for (Pagamento pagamento : this.pagamentos) {
+		for (Pagamento pagamento : this) {
 			if (pagamento.getValor() > valorMinimo) {
 				pagamentosFiltrados.add(pagamento);
 			}
@@ -34,10 +35,10 @@ public class Pagamentos implements Iterable<Pagamento> {
 		return pagamentosFiltrados;
 	}
 
-	public ArrayList<Pagamento> pagamentosDo(String cnpjPagador) {
+	public Collection<Pagamento> pagamentosDo(Documento documentoPagador) {
 		ArrayList<Pagamento> pagamentosFiltrados = new ArrayList<>();
-		for (Pagamento pagamento : this.pagamentos) {
-			if (pagamento.getCnpjPagador().equalsIgnoreCase(cnpjPagador)) {
+		for (Pagamento pagamento : this) {
+			if (pagamento.getDocumentoPagador().equals(documentoPagador)) {
 				pagamentosFiltrados.add(pagamento);
 			}
 		}
@@ -67,5 +68,4 @@ public class Pagamentos implements Iterable<Pagamento> {
 	public Iterator<Pagamento> iterator() {
 		return pagamentos.iterator();
 	}
-
 }

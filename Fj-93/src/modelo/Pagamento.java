@@ -7,7 +7,7 @@ public class Pagamento {
 	private double valor;
 
 	private String pagador;
-	private String cnpjPagador;
+	private Documento documentoPagador;
 
 	private Calendar data;
 
@@ -27,12 +27,12 @@ public class Pagamento {
 		this.pagador = pagador;
 	}
 
-	public String getCnpjPagador() {
-		return cnpjPagador;
+	public Documento getDocumentoPagador() {
+		return documentoPagador;
 	}
 
-	public void setCnpjPagador(String cnpjPagador) {
-		this.cnpjPagador = cnpjPagador;
+	public void setDocumentoPagador(Documento documentoPagador) {
+		this.documentoPagador = documentoPagador;
 	}
 
 	public double getValor() {
